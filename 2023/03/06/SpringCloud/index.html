@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>SpringCloud | Hexo</title><meta name="author" content="学不动学不懂学步冻"><meta name="copyright" content="学不动学不懂学步冻"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SpringCloud服务与服务之间的调用RestTemplate：RestTemplate提供了多种便捷访问远程Http服务的方法，是一种简单便捷的访问restful服务模板类，是spring提供的用于访问Rest服务的客户端模板工具类 12restTemplate.postForObject(url,参数，返回结果类.class)&#x2F;&#x2F;当我们向请求提供方发送post请求时restTemplate">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud">
+<meta property="og:url" content="http://example.com/2023/03/06/SpringCloud/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SpringCloud服务与服务之间的调用RestTemplate：RestTemplate提供了多种便捷访问远程Http服务的方法，是一种简单便捷的访问restful服务模板类，是spring提供的用于访问Rest服务的客户端模板工具类 12restTemplate.postForObject(url,参数，返回结果类.class)&#x2F;&#x2F;当我们向请求提供方发送post请求时restTemplate">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/118332734?v=4">
+<meta property="article:published_time" content="2023-03-05T17:37:35.000Z">
+<meta property="article:modified_time" content="2023-03-05T17:38:35.038Z">
+<meta property="article:author" content="学不动学不懂学步冻">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/118332734?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/03/06/SpringCloud/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SpringCloud',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-06 01:38:35'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><img class="site-icon" src="D:\Blog\ZFsBlog\themes\butterfly\images\headSculpture.png"/><span class="site-name">Hexo</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringCloud</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-05T17:37:35.000Z" title="发表于 2023-03-06 01:37:35">2023-03-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-05T17:38:35.038Z" title="更新于 2023-03-06 01:38:35">2023-03-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringCloud"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><h2 id="服务与服务之间的调用"><a href="#服务与服务之间的调用" class="headerlink" title="服务与服务之间的调用"></a>服务与服务之间的调用</h2><p>RestTemplate：RestTemplate提供了多种便捷访问远程Http服务的方法，是一种简单便捷的访问restful服务模板类，是spring提供的用于访问Rest服务的客户端模板工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">restTemplate.postForObject(url,参数，返回结果类.class)<span class="comment">//当我们向请求提供方发送post请求时</span></span><br><span class="line">restTemplate.getForObject(url,返回结果类.class) <span class="comment">//当我们向请求提供方发送get请求时</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="服务注册中心"><a href="#服务注册中心" class="headerlink" title="服务注册中心"></a>服务注册中心</h2><h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><h4 id="Eureka的基本知识"><a href="#Eureka的基本知识" class="headerlink" title="Eureka的基本知识"></a>Eureka的基本知识</h4><h5 id="什么是服务治理"><a href="#什么是服务治理" class="headerlink" title="什么是服务治理"></a>什么是服务治理</h5><p>SpringCloud 封装了 NetFlix公司开发的Eureka模块来实现服务治理</p>
+<p>在传统饿的RPC远程调用框架中管理每个服务和每个服务之间依赖关系比较复杂，管理比较复杂，所以需要使用服务治理，管理服务于服务之间依赖关系，可以实现服务调用、负载均衡、容错等，实现服务发现与注册</p>
+<h5 id="什么是服务的注册与发现"><a href="#什么是服务的注册与发现" class="headerlink" title="什么是服务的注册与发现"></a>什么是服务的注册与发现</h5><p>Eureka采用了CS的设计架构，Eureka Server作为服务注册功能的服务器，他是服务注册中心，而系统中的其他微服务没使用Eureka的客户端连接到Eureka Server并维持心跳连接。这样系统的维护人员就可以通过Eureka Server来监控系统中的各个微服务是否正常运行</p>
+<p>在微服务注册与发现中，有一个注册中心，当服务器启动时，会把当前自己服务器的信息比如， 服务器通讯地址等以别名的方式注册到注册中心上，另一个方（消费者|服务提供者）以该别名的方式去注册中心上获取到世纪的服务通讯地址，然后再实现本地RPC调用，RPC远程调用框架核心思想在于注册中心，因为注册中心管理每个服务与服务之间的一个依赖关系（服务治理观念）。在任何rpc远程夸那个价中，都会有一个注册中心（存放地址相关信息（接口地址））</p>
+<h5 id="Eureka的两大组件：Eureka-Server和Eureka-Client"><a href="#Eureka的两大组件：Eureka-Server和Eureka-Client" class="headerlink" title="Eureka的两大组件：Eureka Server和Eureka Client"></a>Eureka的两大组件：Eureka Server和Eureka Client</h5><ul>
+<li>Eureka Server 提供服务注册服务</li>
+<li>Eureka Client通过注册中心进行访问</li>
+</ul>
+<p>我们构建 Eureka Server时，要导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后修改配置文件application.yaml</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">7001</span>    <span class="comment"># 该服务的端口号</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">eureka-server</span>   <span class="comment">#该服务的服务名</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">localhost</span>  <span class="comment">#该服务的主机IP</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka</span>  <span class="comment">#访问Eureka Server所要进入的默认路径</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">false</span>  <span class="comment"># false表示自己就是注册中心。我的职责就是维护服务实例，并不需要去检索服务</span></span><br><span class="line">    <span class="attr">fetch-registry:</span> <span class="literal">false</span>  <span class="comment"># false表示自己就是注册中心。我的职责就是维护服务实例，并不需要去检索服务</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在启动类 中加上注解 @EnableEurekaServer</p>
+<p>开启服务并访问 Eureka server</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230222202954794.png" alt="image-20230222202954794"></p>
+<p>Eureka Client</p>
+<p>首先导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在配置文件中修改配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="comment">#表示是否将自己注册进Eureka Server 默认为true</span></span><br><span class="line">    <span class="attr">register-with-eureka:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment">#是否从EurekaServer抓取已有的服务信息，默认为true，单点无所谓集群必须设置为true才能配合Ribbon使用负载均衡</span></span><br><span class="line">    <span class="attr">fetch-registry:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">service-url:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://localhost:7001/eureka</span></span><br></pre></td></tr></table></figure>
+
+<p>在启动类上加上注解 @EnableEurekaClient</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230222205942068.png" alt="image-20230222205942068"></p>
+<p>服务重新部署以后我们会在 EurekaServer页面看到</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230222210028207.png" alt="image-20230222210028207"></p>
+<p>这里的Application的名称即为 服务提供者的Application中的spring.application.name</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230222210630618.png" alt="image-20230222210630618"></p>
+<h4 id="Eureka集群"><a href="#Eureka集群" class="headerlink" title="Eureka集群"></a>Eureka集群</h4><h5 id="EurekaServer-集群"><a href="#EurekaServer-集群" class="headerlink" title="EurekaServer 集群"></a>EurekaServer 集群</h5><p>EurekaServer集群注册秉承着相互注册的方式（你中有我，我中有你）</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223144021218.png" alt="image-20230223144021218"></p>
+<h5 id="EurekaServer集群实现"><a href="#EurekaServer集群实现" class="headerlink" title="EurekaServer集群实现"></a>EurekaServer集群实现</h5><p>首先两个服务端要有分别不同的端口号例如（7001,7002）</p>
+<p>其次我们在对应模块的application.yaml中修改主机名称配置：由原先的localhost变为eruekaXXXX.com</p>
+<p>再修改要连接的Eureka服务注册与发现中心配置，但要为另一个服务端的连接地址</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223144722821.png" alt="image-20230223144722821"></p>
+<p>我们将这两个服务端的这两个配置修改完成后，去修改 <strong>C:\Windows\System32\drivers\etc</strong>文件夹下的hosts文件，向其中修改映射地址</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223144905374.png" alt="image-20230223144905374"></p>
+<p>一切修改完成后我们可以重启这两个服务接下来就可以看到</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223145016661.png" alt="image-20230223145016661"></p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223145054505.png" alt="image-20230223145054505"></p>
+<h5 id="EurekaClient集群的实现"><a href="#EurekaClient集群的实现" class="headerlink" title="EurekaClient集群的实现"></a>EurekaClient集群的实现</h5><p>EurekaClient集群实现非常容易，在application.yaml中的修改</p>
+<p>将两个EurekaServer的服务注册地址全部添加到配置文件中</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223145954080.png" alt="image-20230223145954080"></p>
+<p>然后可以发现</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223150216502.png" alt="image-20230223150216502"></p>
+<h4 id="Eureka服务调用"><a href="#Eureka服务调用" class="headerlink" title="Eureka服务调用"></a>Eureka服务调用</h4><p>在服务消费者的模块中，我们可以看到，我们所调用的服务提供者模块是写死的，只能写为端口号为8001或8002的主机的IP地址以及端口号，但这与我们构建集群的目的相互违背，所以是调用8001端口的主机还是调用8002端口的主机，这种问题的结局方案就是 负载均衡</p>
+<p>我们在服务消费者模块下的配置类的RestTemplate上加入注解@LoadBalanced ，而后在 Controller类中的URL的IP地址以及端口除改为服务消费者的名称</p>
+<p>CLOUD-PAYMENT-SERVICE 即可实现对服务提供者集群的调用，并且实现了负载均衡</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223151511296.png" alt="image-20230223151511296"></p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223151526058.png" alt="image-20230223151526058"></p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223151701195.png" alt="image-20230223151701195"></p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223151720385.png" alt="image-20230223151720385"></p>
+<h4 id="actuator微服务信息的完善"><a href="#actuator微服务信息的完善" class="headerlink" title="actuator微服务信息的完善"></a>actuator微服务信息的完善</h4><p>当我们在Eureka网页中看到两个服务提供者时他们的名称默认为   主机IP：服务应用名：端口号的形式，我们可以修改格式将其改为我们想修改的名称</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span>  </span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">instance-id:</span> <span class="string">Payment8001</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span>  </span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">instance-id:</span> <span class="string">Payment8002</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.hasdsd.cn/imgimage-20230223153544797.png" alt="image-20230223153544797"></p>
+<p>增加配置可显示详细信息（服务的IP地址以及端口号）</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span>  </span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">instance-id:</span> <span class="string">Payment8002</span></span><br><span class="line">    <span class="attr">prefer-ip-address:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="服务注册发现-DisCovery"><a href="#服务注册发现-DisCovery" class="headerlink" title="服务注册发现(DisCovery)"></a>服务注册发现(DisCovery)</h4><p>首先我们在订单启动类中加入注解@EnableDiscoveryClient，然后在Controller类中注入类DisCoveryClient</p>
+<p>首先了解discoveryClient的两个方法</p>
+<p>discoveryClient.getServices  获取在Eureka中的服务</p>
+<p>discoveryClient.getInstances(ServiceID)； 获取该ServiceID集群下的所有具体实例</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223162529968.png" alt="image-20230223162529968"></p>
+<p>我们可以获取实例下的一些配置信息</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230223163314450.png" alt="image-20230223163314450"></p>
+<h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>关于Zookeeper的基础知识在其它博客中，本节主要介绍，zookeeper与springcloud的结合使用作为服务注册中心</p>
+<h4 id="服务提供者注册进zookeeper"><a href="#服务提供者注册进zookeeper" class="headerlink" title="服务提供者注册进zookeeper"></a>服务提供者注册进zookeeper</h4><p>导入依赖坐标</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-zookeeper-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--由于该坐标依赖中zookeeper的版本依赖与本机的虚拟机中zookeeper的版本号不同，所以要先排除zookeeper--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.6<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-log4j12<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--再者，SpringBootWeb的依赖坐标中的子项也有对slf4j的依赖，所以在此要排除zookeeper中的slf4j依赖--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在模块的配置文件中,添加连接地址</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span>  </span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">zookeeper:</span></span><br><span class="line">      <span class="attr">connect-string:</span> <span class="number">192.168</span><span class="number">.26</span><span class="number">.132</span><span class="string">:2181</span></span><br></pre></td></tr></table></figure>
+
+<p>Zookeeper端开启服务，SpringBoot开启服务</p>
+<p>Zookeeper客户端中可看到</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230301170555894.png" alt="image-20230301170555894"></p>
+<p>在浏览器中可看到</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230301170710438.png" alt="image-20230301170710438"></p>
+<h4 id="Zookeeper服务注册中心中节点的状态"><a href="#Zookeeper服务注册中心中节点的状态" class="headerlink" title="Zookeeper服务注册中心中节点的状态"></a>Zookeeper服务注册中心中节点的状态</h4><p>当我们断开SpringBoot的连接时我们会发现</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230301171418594.png" alt="image-20230301171418594"></p>
+<p>38处我们会发现 &#x2F;services节点消失了，这说明什么？</p>
+<p>这说明 zookeeper作为服务注册中心时，其注册的服务在zookeeper中的节点应为临时节点，一旦连接断开，时间超过规定时间，那么节点就会自动删除</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="Ribbon"><a href="#Ribbon" class="headerlink" title="Ribbon"></a>Ribbon</h2><h3 id="什么是Ribbon"><a href="#什么是Ribbon" class="headerlink" title="什么是Ribbon"></a>什么是Ribbon</h3><p>Springcloud Rinbbon 是基于netflix Rinbbon实现的一套客户端负载均衡工具</p>
+<p>简单来说，Ribbon是Netflix发布的开源项目，主要功能是提供客户端的软件负载均衡算法和服务调用，Ribbon客户端组件提供一系列完善的配置项如连接超时，重试。简单来说，就是在配置文件中列出Load Balanced(LB)后面所有的机器，Ribbon会自动的帮助你基于某种规则（如简单轮询，随机连接等）去连接这些机器。我们很容易使用Ribbon实现自定义的负载均衡算法</p>
+<h3 id="LB负载均衡（Load-Balance）是什么"><a href="#LB负载均衡（Load-Balance）是什么" class="headerlink" title="LB负载均衡（Load Balance）是什么"></a>LB负载均衡（Load Balance）是什么</h3><p>简单的说就是将用户的请求平摊的分配到多个服务上，从而达到系统高可用</p>
+<p>常见的负载均衡软件有Nginx，LVS，硬件F5等</p>
+<h3 id="Ribbon本地负载均衡服务器VSNginx服务端负载均衡的区别"><a href="#Ribbon本地负载均衡服务器VSNginx服务端负载均衡的区别" class="headerlink" title="Ribbon本地负载均衡服务器VSNginx服务端负载均衡的区别"></a>Ribbon本地负载均衡服务器VSNginx服务端负载均衡的区别</h3><p>Nginx是服务器负载均衡，客户端所有请求都会交给nginx，然后由nginx实现转发请求。即负载均衡是由服务端实现的</p>
+<p>Ribbon本地负载均衡，在调用微服务接口时，会在注册中心上获取注册信息服务列表之后缓存到JVM本地，从而在本地实现RPC远程服务调用技术</p>
+<p>在进程中的负载均衡将负载均衡逻辑集成到消费方，消费方从服务注册中心获知有哪些地址可用，然后自己再从这些地址中选择出一个合适的服务器</p>
+<p>Ribbon就属于进程中的LB，他只是一个类库，集成于消费方进程，消费方通过它来获取到服务提供方的地址</p>
+<h3 id="Ribbon的Rest调用"><a href="#Ribbon的Rest调用" class="headerlink" title="Ribbon的Rest调用"></a>Ribbon的Rest调用</h3><p>在RestTemplate中会有方法 getForEntity和 postForEntity，调用它时会返回一个ResponseEntity&lt;~&gt;泛型类的对象，可查询状态码查询成功</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230302125142832.png" alt="image-20230302125142832"></p>
+<p>我们可判断其中的状态码</p>
+<p>并且该对象可直接将泛型中的对象获取</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/consumer/payment/EntityGet/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> CommentResult&lt;Payment&gt; <span class="title function_">getPayment</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span>&#123;</span><br><span class="line"></span><br><span class="line">        ResponseEntity&lt;CommentResult&gt; result= restTemplate.getForEntity(PAYMENT_URL+<span class="string">&quot;/payment/get/&quot;</span>+id,CommentResult.class);</span><br><span class="line">        <span class="keyword">if</span> (result.getStatusCode().is2xxSuccessful()) &#123;</span><br><span class="line">            <span class="keyword">return</span> result.getBody();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">CommentResult</span>&lt;&gt;(<span class="number">444</span>,<span class="string">&quot;操作失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义Ribbon的负载均衡策略时，不能在主启动类包及其子包下</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230302130407669.png" alt="image-20230302130407669"></p>
+<p>我们对负载均衡策略配置时</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyselfRule</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> IRule <span class="title function_">myRule</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">RandomRule</span>(); <span class="comment">// 选择随机策略</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在启动类中加入注解</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230302150726019.png" alt="image-20230302150726019"></p>
+<h3 id="轮询算法的原理"><a href="#轮询算法的原理" class="headerlink" title="轮询算法的原理"></a>轮询算法的原理</h3><p>负载均衡算法：rest接口第几次请求数%服务器集群数量&#x3D;实际调用服务器位置下标，每次服务重启后rest接口记数从1 开始</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230302151520503.png" alt="image-20230302151520503"></p>
+<h2 id="OpenFeign"><a href="#OpenFeign" class="headerlink" title="OpenFeign"></a>OpenFeign</h2><h3 id="Feign是什么"><a href="#Feign是什么" class="headerlink" title="Feign是什么"></a>Feign是什么</h3><p>Feign是一个声明式的Web服务客户端，让编写Web服务客户端变得非常容易，只需要创建一个接口并在接口上添加注解即可</p>
+<h3 id="Feign能干什么"><a href="#Feign能干什么" class="headerlink" title="Feign能干什么"></a>Feign能干什么</h3><p>Feign旨在使编写Java Http客户端变得更容易</p>
+<p>前面在使用Ribbon+RestTemplate时，利用RestTemplate对http请求的封装处理，形成了一套模版化的调用方法，但在实际开发中，由于对服务以来的调用可能不止一处，往往一个接口被多处调用，通常都会针对每个服务自行封装一些客户端类来包装这些依赖服务的调用。所以，Feign在此基础上做了进一步封装，由他来帮助我们定义和实现依赖服务接口的定义，在Feign的实现下，我们只需创建一个接口并使用注解的方式来配置它（以前是Dao接口标注Mapper注解，现在是一个微服务接口上标注一个Feign注解即可），即可完成对服务提供方的接口绑定，简化使用了SpringCloud Ribbon 时，自动封装服务调用客户端的开发量</p>
+<h3 id="Feign集成了Ribbon"><a href="#Feign集成了Ribbon" class="headerlink" title="Feign集成了Ribbon"></a>Feign集成了Ribbon</h3><p>利用Ribbon维护了Payment的服务列表信息，并且通过轮询实现客户端负载均衡，而Ribbon不同的是，通过feign只需要定义服务绑定接口且以生命是的方法，优雅而简单的实现服务调用</p>
+<h3 id="Feign的使用"><a href="#Feign的使用" class="headerlink" title="Feign的使用"></a>Feign的使用</h3><p>Feign和Eureka实现了服务的注册发现和调用</p>
+<p>首先导入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在Service接口中（FeignClient中后面跟的Value是服务的名称）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@FeignClient(value = &quot;CLOUD-PAYMENT-SERVICE&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">PaymentFeignService</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/payment/get/&#123;id&#125;&quot;)</span></span><br><span class="line">    CommentResult&lt;Payment&gt; <span class="title function_">getPaymentById</span><span class="params">(<span class="meta">@PathVariable(&quot;id&quot;)</span> Long id)</span>; <span class="comment">//该方法要与服务提供方的方法一致</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在主启动类上，添加注解@EnableFeignClient</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230305120558331.png" alt="image-20230305120558331"></p>
+<h3 id="OpenFeign的超时调用"><a href="#OpenFeign的超时调用" class="headerlink" title="OpenFeign的超时调用"></a>OpenFeign的超时调用</h3><p>当我们的响应时间超过一秒时，会出现以下状况</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230305200427586.png" alt="image-20230305200427586"></p>
+<p>OpenFeign的底层原理就是Ribbon+RestTemplate的动态调用，Ribbon默认设置为响应超过一秒直接报错（超时调用），我们但当网络不通畅时，我们的调用无论怎样都会报错，那么我们如何去延长Ribbon超时报错的时间呢？</p>
+<p>修改服务消费者配置文件中的配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ribbon:</span><br><span class="line">  ReadTimeout: 5000  <span class="comment">&lt;!--调用时长超过5000毫秒--&gt;</span></span><br><span class="line">  ConnectTimeout: 5000  <span class="comment">&lt;!--连接时长超过5000毫秒--&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h2><h3 id="什么是Hystrix"><a href="#什么是Hystrix" class="headerlink" title="什么是Hystrix"></a>什么是Hystrix</h3><p>Hystrix是一个用于处理分布式系统的延迟和容错的开源库，在分布式系统里，许多依赖不可避免的会调用失败，比如超时、异常等，</p>
+<p>Hystrix能够保证在同一个依赖出问题的情况下，不会导致整体服务失败，避免级联故障，以提高分布式系统的弹性</p>
+<p>“断路器”本身是一种开关装置，当某个单元发生故障后，通过断路器的故障监控（类似于熔断保险丝），向调用方返回一个符合预期的、可处理的备选响应（fallBack），而不是长时间的等待或者抛出调用方无法处理的异常，这样就保证了服务调用方的超线程不被长时间、不必要地占用，从而避免了故障在分布式系统中的蔓延，乃至雪崩</p>
+<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><p>当我们出现以下情况的时候：如果D服务发生了故障不能响应，B服务调用D时只能阻塞等待。假如B服务调用D服务设置超时时间是10秒，请求速率是每秒100个，那10秒内就会有1000个请求线程被阻塞等待，如果B的线程池大小设置1000，那B系统因为线程资源耗尽已经不能对外提供服务了。而这又影响了入口系统A的服务，最终导致系统全面崩溃。</p>
+<p>所以我们需要对服务雪崩的容错设计，所以需要系统容错中的限流、熔断和服务降级。</p>
+<h4 id="什么是服务限流"><a href="#什么是服务限流" class="headerlink" title="什么是服务限流"></a>什么是服务限流</h4><p>当系统的处理能力不能应对外部请求的突增流量时，为了不让系统崩溃，必须采取限流的措施。</p>
+<p>限流中有三个指标：</p>
+<ol>
+<li>TPS：每秒系统事务吞吐量，系统吞吐量是衡量系统性能的关键指标，按照事务的完成数量来限流是最合理的。</li>
+<li>HPS：每秒请求数，指每秒钟服务端收到客户端的请求数量。</li>
+<li>QPS：服务端每秒能够响应的客户端查询请求数量。</li>
+</ol>
+<h5 id="服务限流的几个算法："><a href="#服务限流的几个算法：" class="headerlink" title="服务限流的几个算法："></a>服务限流的几个算法：</h5><ol>
+<li><p>​	流量计数器：直接去限制每秒请求数量，例如限制为100，超过100就会被拒绝访问</p>
+<ul>
+<li>缺点：在单位时间内，很难把控HPS（服务器每秒收到的请求数），倘若上一秒（1s为单位时间）还不到100但是实际上，在上一秒到这一秒的时间间隔内可能已经出现了HPS&gt;100</li>
+<li>有一段时间流量超了，也不一定真的需要限流，系统HPS限制50，虽然前3s流量超了，但是如果都超时时间设置为5s，并不需要限流</li>
+</ul>
+</li>
+<li><p>滑动时间窗口： 例如操作系统中的滑动时间窗口</p>
+<ul>
+<li><p><img src="https://img.hasdsd.cn/imgimage-20230306001006758.png" alt="image-20230306001006758"></p>
+</li>
+<li><p>开始的时候，我们把t1<del>t5看做一个时间窗口，每个窗口1s，如果我们定的限流目标是每秒50个请求，那t1</del>t5这个窗口的请求总和不能超过250个。</p>
+<p>这个窗口是滑动的，下一秒的窗口成了t2~t6，这时把t1时间片的统计抛弃，加入t6时间片进行统计。这段时间内的请求数量也不能超过250个。</p>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>一旦流量超过就必须抛弃或者走服务降级</li>
+<li>对流量控制不够精细，不能限制集中在短时间内的流量，也不能削峰填谷</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>漏桶方法</p>
+<ul>
+<li><img src="https://img.hasdsd.cn/imgimage-20230306001603783.png" alt="image-20230306001603783"></li>
+<li>在客户端的请求发送到服务器之前，先用漏桶缓存起来，这个漏桶可以是一个长度固定的队列，这个队列中的请求均匀地发送到服务端。如果客户端的请求速率太快，漏桶的队列满了，就会被拒绝掉，或者走降级处理逻辑。这样服务端就不会受到突发流量的冲击。</li>
+<li>有3个问题需要考虑:<ul>
+<li>漏桶的大小，如果太大，可能给服务端带来较大处理压力，太小可能会有大量请求被丢弃。</li>
+<li>漏桶给服务端的请求发送速率。</li>
+<li>使用缓存请求的方式，会使请求响应时间变长。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>令牌桶算法</p>
+<ul>
+<li>令牌桶算法就跟病人去医院看病一样，找医生之前需要先挂号，而医院每天放的号是有限的。当天的号用完了，第二天又会放一批号。</li>
+<li><img src="https://img.hasdsd.cn/imgimage-20230306002005877.png" alt="image-20230306002005877"></li>
+</ul>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">学不动学不懂学步冻</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/06/SpringCloud/">http://example.com/2023/03/06/SpringCloud/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Hexo</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/118332734?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">学不动学不懂学步冻</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">1</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zzzzzf2001" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="/zzzzzf011129@163.com" target="_blank" title=""><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringCloud"><span class="toc-number">1.</span> <span class="toc-text">SpringCloud</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E4%B8%8E%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B0%83%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">服务与服务之间的调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="toc-number">1.2.</span> <span class="toc-text">服务注册中心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eureka"><span class="toc-number">1.2.1.</span> <span class="toc-text">Eureka</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Eureka%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Eureka的基本知识</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86"><span class="toc-number">1.2.1.1.1.</span> <span class="toc-text">什么是服务治理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0"><span class="toc-number">1.2.1.1.2.</span> <span class="toc-text">什么是服务的注册与发现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Eureka%E7%9A%84%E4%B8%A4%E5%A4%A7%E7%BB%84%E4%BB%B6%EF%BC%9AEureka-Server%E5%92%8CEureka-Client"><span class="toc-number">1.2.1.1.3.</span> <span class="toc-text">Eureka的两大组件：Eureka Server和Eureka Client</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Eureka%E9%9B%86%E7%BE%A4"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Eureka集群</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#EurekaServer-%E9%9B%86%E7%BE%A4"><span class="toc-number">1.2.1.2.1.</span> <span class="toc-text">EurekaServer 集群</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#EurekaServer%E9%9B%86%E7%BE%A4%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.1.2.2.</span> <span class="toc-text">EurekaServer集群实现</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#EurekaClient%E9%9B%86%E7%BE%A4%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.2.1.2.3.</span> <span class="toc-text">EurekaClient集群的实现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Eureka%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Eureka服务调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#actuator%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%BF%A1%E6%81%AF%E7%9A%84%E5%AE%8C%E5%96%84"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">actuator微服务信息的完善</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%8F%91%E7%8E%B0-DisCovery"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">服务注册发现(DisCovery)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zookeeper"><span class="toc-number">1.3.</span> <span class="toc-text">Zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85%E6%B3%A8%E5%86%8C%E8%BF%9Bzookeeper"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">服务提供者注册进zookeeper</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Zookeeper%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E4%B8%AD%E8%8A%82%E7%82%B9%E7%9A%84%E7%8A%B6%E6%80%81"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">Zookeeper服务注册中心中节点的状态</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ribbon"><span class="toc-number">1.5.</span> <span class="toc-text">Ribbon</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRibbon"><span class="toc-number">1.5.1.</span> <span class="toc-text">什么是Ribbon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LB%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%EF%BC%88Load-Balance%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.5.2.</span> <span class="toc-text">LB负载均衡（Load Balance）是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ribbon%E6%9C%AC%E5%9C%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%9C%8D%E5%8A%A1%E5%99%A8VSNginx%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.5.3.</span> <span class="toc-text">Ribbon本地负载均衡服务器VSNginx服务端负载均衡的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ribbon%E7%9A%84Rest%E8%B0%83%E7%94%A8"><span class="toc-number">1.5.4.</span> <span class="toc-text">Ribbon的Rest调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AE%E8%AF%A2%E7%AE%97%E6%B3%95%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.5.5.</span> <span class="toc-text">轮询算法的原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenFeign"><span class="toc-number">1.6.</span> <span class="toc-text">OpenFeign</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.6.1.</span> <span class="toc-text">Feign是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E8%83%BD%E5%B9%B2%E4%BB%80%E4%B9%88"><span class="toc-number">1.6.2.</span> <span class="toc-text">Feign能干什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E9%9B%86%E6%88%90%E4%BA%86Ribbon"><span class="toc-number">1.6.3.</span> <span class="toc-text">Feign集成了Ribbon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.6.4.</span> <span class="toc-text">Feign的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenFeign%E7%9A%84%E8%B6%85%E6%97%B6%E8%B0%83%E7%94%A8"><span class="toc-number">1.6.5.</span> <span class="toc-text">OpenFeign的超时调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hystrix"><span class="toc-number">1.7.</span> <span class="toc-text">Hystrix</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFHystrix"><span class="toc-number">1.7.1.</span> <span class="toc-text">什么是Hystrix</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-number">1.7.2.</span> <span class="toc-text">面试题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%9C%8D%E5%8A%A1%E9%99%90%E6%B5%81"><span class="toc-number">1.7.2.1.</span> <span class="toc-text">什么是服务限流</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E9%99%90%E6%B5%81%E7%9A%84%E5%87%A0%E4%B8%AA%E7%AE%97%E6%B3%95%EF%BC%9A"><span class="toc-number">1.7.2.1.1.</span> <span class="toc-text">服务限流的几个算法：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/06/SpringCloud/" title="SpringCloud">SpringCloud</a><time datetime="2023-03-05T17:37:35.000Z" title="发表于 2023-03-06 01:37:35">2023-03-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 学不动学不懂学步冻</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
