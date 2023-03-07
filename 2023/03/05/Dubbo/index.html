@@ -1,0 +1,246 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Dubbo | MyBlog</title><meta name="author" content="学不动学不懂学步冻"><meta name="copyright" content="学不动学不懂学步冻"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Dubbo分布式系统为了达成大型互联网项目架构的目标，分布式系统出现了 大型互联网项目架构目标衡量网站的性能指标 响应时间：指执行一个请求从开始到收到相应所花费的总体时间 并发数：指系统同时能够处理的请求数量 并发连接数：指的时客户端向服务器发送请求，并建立TCP连接，每秒服务器连接的总TCP数量 请求数：也称为QPS（Query per Second）指每秒多少请求 并发数：单位时间内有多少用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dubbo">
+<meta property="og:url" content="http://example.com/2023/03/05/Dubbo/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="Dubbo分布式系统为了达成大型互联网项目架构的目标，分布式系统出现了 大型互联网项目架构目标衡量网站的性能指标 响应时间：指执行一个请求从开始到收到相应所花费的总体时间 并发数：指系统同时能够处理的请求数量 并发连接数：指的时客户端向服务器发送请求，并建立TCP连接，每秒服务器连接的总TCP数量 请求数：也称为QPS（Query per Second）指每秒多少请求 并发数：单位时间内有多少用户">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/118332734?v=4">
+<meta property="article:published_time" content="2023-03-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-07T10:10:36.629Z">
+<meta property="article:author" content="学不动学不懂学步冻">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/118332734?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/03/05/Dubbo/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Dubbo',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-07 18:10:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="MyBlog"><img class="site-icon" src="D:\Blog\ZFsBlog\themes\butterfly\images\headSculpture.png"/><span class="site-name">MyBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Dubbo</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-04T16:00:00.000Z" title="发表于 2023-03-05 00:00:00">2023-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-07T10:10:36.629Z" title="更新于 2023-03-07 18:10:36">2023-03-07</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Dubbo"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><h2 id="分布式系统"><a href="#分布式系统" class="headerlink" title="分布式系统"></a>分布式系统</h2><p>为了达成大型互联网项目架构的目标，分布式系统出现了</p>
+<h3 id="大型互联网项目架构目标"><a href="#大型互联网项目架构目标" class="headerlink" title="大型互联网项目架构目标"></a>大型互联网项目架构目标</h3><h4 id="衡量网站的性能指标"><a href="#衡量网站的性能指标" class="headerlink" title="衡量网站的性能指标"></a>衡量网站的性能指标</h4><ol>
+<li>响应时间：指执行一个请求从开始到收到相应所花费的总体时间</li>
+<li>并发数：指系统同时能够处理的请求数量<ol>
+<li>并发连接数：指的时客户端向服务器发送请求，并建立TCP连接，每秒服务器连接的总TCP数量</li>
+<li>请求数：也称为QPS（Query per Second）指每秒多少请求</li>
+<li>并发数：单位时间内有多少用户</li>
+</ol>
+</li>
+<li>吞吐量：单位时间内系统能够处理的请求数量<ol>
+<li>QPS：Query Per Second 每秒查询数</li>
+<li>TPS： Transcations Per Second 每秒事务数</li>
+<li>一个事务是指一个客户机向服务器发送请求然后服务器作出反应的过程，客户机在发送请求时开始计时，收到服务器响应后结束计时，从此来计算使用的时间和完成的事务数</li>
+<li>​	QPS &gt;&#x3D; 并发连接数 &gt;&#x3D;TPS</li>
+</ol>
+</li>
+<li>高性能：提供快速的访问体验</li>
+<li>高可用：网站服务一直可以正常访问</li>
+<li>可伸缩：通过硬件增加&#x2F;减少，提高&#x2F;降低处理能力</li>
+</ol>
+<h3 id="集群和分布式"><a href="#集群和分布式" class="headerlink" title="集群和分布式"></a>集群和分布式</h3><ul>
+<li>集群：很多“人”一起，干一样的事</li>
+<li>分布式：很多“人”一起，干不一样的事。这些不一样的事，合起来是一件大事</li>
+</ul>
+<p><img src="https://img.hasdsd.cn/imgimage-20230218133506199.png" alt="image-20230218133506199"></p>
+<p>在分布式架构，服务的消费者和服务的提供者之间的通信由RPC来实现</p>
+<ul>
+<li>分布式架构是指在垂直架构的基础上，将公共业务模块抽离出来，作为独立的服务，供其他调用者消费，以实现服务的共享和重用</li>
+<li>RPC：Remote Procedure Call 远程过程调用，有非常多的协议和技术来实现RPC过程，比附HTTP REST风格，Java RMI规范、WebService SOAP协议、Hession等等</li>
+</ul>
+<p><img src="https://img.hasdsd.cn/imgimage-20230218134646083.png" alt="image-20230218134646083"></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>Dubbo是阿里巴巴公司开源的一个高性能、轻量级的JavaRPC框架</li>
+<li>致力于提供高性能和透明化的RPC远程服务调用方案，以及SOA服务治理方案</li>
+<li>官网：<a target="_blank" rel="noopener" href="http://dubbo.apache.org/">http://dubbo.apache.org</a></li>
+</ul>
+<h3 id="Dubbo架构"><a href="#Dubbo架构" class="headerlink" title="Dubbo架构"></a>Dubbo架构</h3><p><img src="https://img.hasdsd.cn/imgimage-20230218154810072.png" alt="image-20230218154810072"></p>
+<h2 id="Dubbo的特性"><a href="#Dubbo的特性" class="headerlink" title="Dubbo的特性"></a>Dubbo的特性</h2><h3 id="地址缓存"><a href="#地址缓存" class="headerlink" title="地址缓存"></a>地址缓存</h3><ul>
+<li>当zookeeper突然宕机时，我们服务之间的调用是否还会继续调用？<ul>
+<li>会，当服务之间在初次调用时，会将zookeeper中的服务提供方的地址缓存到本地，以后在调用则不会访问注册中心</li>
+<li>当服务提供者地址发生变化时，注册中心会通知服务消费者</li>
+</ul>
+</li>
+</ul>
+<h3 id="超时和重试"><a href="#超时和重试" class="headerlink" title="超时和重试"></a>超时和重试</h3><h4 id="超时"><a href="#超时" class="headerlink" title="超时"></a>超时</h4><p><img src="https://img.hasdsd.cn/imgimage-20230221100427202.png" alt="image-20230221100427202"></p>
+<ul>
+<li>服务消费者在调用服务提供者的时候发生了阻塞，登台的情况，这个时候这个服务的消费者会一直等待下去</li>
+<li>在某个峰值时刻，大量的请求都在同时请求服务消费者，会造成线程的大量堆积，势必会造成雪崩</li>
+<li>dubbo利用超时机制来解决这个问题，设置一个超时时间，在这个时间段内，无法完成服务访问，则自动断开链接 </li>
+<li>在服务提供方的@Service（Dubbo）的注解中添加属性timeout&#x3D;x000 reties&#x3D;2，指的是如果x秒后链接不成功，则自动断开链接</li>
+</ul>
+<p><strong>为什么要在服务提供方的@Service添加属性而不是在服务消费方@Reference中添加属性呢？</strong></p>
+<p>因为在实际开发中，服务的提供方和服务的请求方并非同一人员开发，但服务的提供方往往要对数据库中的数据进行相关操作，服务方会预估大概的操作时长，依据这个操作时长来给出对应的超时时长（@Reference中的属性会覆盖@Service中的属性）</p>
+<h4 id="重试"><a href="#重试" class="headerlink" title="重试"></a>重试</h4><p><img src="https://img.hasdsd.cn/imgimage-20230221103254819.png" alt="image-20230221103254819"></p>
+<p>在服务消费者去请求链接服务提供者时，如果超过了超时时长，则会自动断开链接，但我们的请求并非每次都能调用成功，例如出现网络抖动时，我们仍然需要断线重连，所以Dubbo为我们提供了重试机制来避免类似事情的发生</p>
+<ul>
+<li>通过reties属性来设置重试次数，默认为两次</li>
+</ul>
+<h3 id="多版本"><a href="#多版本" class="headerlink" title="多版本"></a>多版本</h3><p>在进行服务调用时，我们服务提供者会版本更新，当更新时会让一部分用户先使用新功能，用户反映没有问题时，再将所有用户迁移到新功能这就是灰度发布</p>
+<p>如何实现灰度发布？</p>
+<p>在服务消费者的@Reference注解中添加属性version&#x3D;”v1.0(v2.0)”即可实现服务的灰色发布 </p>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>服务消费者在请求连接服务提供者时，有多个服务提供者，那么服务消费者又以什么策略去请求哪个服务提供者呢？为实现这个问题Dubbo给出了方案：负载均衡</p>
+<p>Dubbo的负载均衡有4种策略</p>
+<ul>
+<li>Random：按权重随机，默认值。按权重设置随机概率，根据下图，服务提供者2的权重比为200&#x2F;（200+100+100）&#x3D;50%，所以请求连接到他的概率就为50%</li>
+</ul>
+<p><img src="https://img.hasdsd.cn/imgimage-20230221113037380.png" alt="image-20230221113037380"></p>
+<ul>
+<li>RoundRobin：按权重轮询，倘若三个服务提供者的权重分别为provider1: 2 。provider2：3.。provider3：5，依据权重比2:3:5，说明当轮询10次时，一定会出现provider1被调用2次，provider2被调用3次，provider3被调用5次</li>
+</ul>
+<p><img src="https://img.hasdsd.cn/imgimage-20230221113725444.png" alt="image-20230221113725444"></p>
+<ul>
+<li>LeastActive：最少活跃调用数，相同活跃数的随机。这里需要解释一下，当我们的服务提供者在提供服务时（能同时提供给不止一个消费者），服务的记数就会加一，相当于服务的调用数+1，服务结束后，再将服务调用数减一。当providerA开始为一个consumer提供服务时他的权重为1，同时providerB也开始为一个consumer提供服务他的权重也为1，这时providerB的处理速度比较快，服务提供完毕，providerB 的权重就为0，而这时providerA 还在继续刚才的服务提供，所以这时它的权重就为1， 这时 又有consumer请求服务， 根据LeastActive策略： providerA的权重&gt;providerB的权重，所以providerB将会进行服务</li>
+</ul>
+<h1 id="ConsistentHashLoadBalance-一致性Hash算法-，还没搞懂"><a href="#ConsistentHashLoadBalance-一致性Hash算法-，还没搞懂" class="headerlink" title="ConsistentHashLoadBalance: 一致性Hash算法 ，还没搞懂"></a>ConsistentHashLoadBalance: 一致性Hash算法 ，还没搞懂</h1><h3 id="集群容错"><a href="#集群容错" class="headerlink" title="集群容错"></a>集群容错</h3><p>集群容错模式</p>
+<ul>
+<li>Failover Cluster :失败重试，默认值 2。当出现失败，重试其他服务器，默认重试两次，使用retries配置，一般用于读操作</li>
+<li>Failfast Cluster :快速失败，只发起一次调用，失败立即报错。通常用于写操作</li>
+<li>Failsafe Cluster： 失败安全，出现异常时，直接忽略，返回一个空结果</li>
+<li>Failback Cluster： 失败自动恢复，后台记录失败请求，定时重发</li>
+<li>Forking Cluster： 并行调用多个服务器，只要一个成功即返回</li>
+<li>Broadcast Cluster：广播调用所有提供者，逐个调用，任意一台报错则不报错</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">学不动学不懂学步冻</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/05/Dubbo/">http://example.com/2023/03/05/Dubbo/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">MyBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/118332734?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/05/JUC/" title="JUC"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JUC</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/05/JVM/" title="JVM"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JVM</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">学不动学不懂学步冻</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zzzzzf2001" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="/zzzzzf011129@163.com" target="_blank" title=""><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo"><span class="toc-number">1.</span> <span class="toc-text">Dubbo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">分布式系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E5%9E%8B%E4%BA%92%E8%81%94%E7%BD%91%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E7%9B%AE%E6%A0%87"><span class="toc-number">1.1.1.</span> <span class="toc-text">大型互联网项目架构目标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A1%E9%87%8F%E7%BD%91%E7%AB%99%E7%9A%84%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">衡量网站的性能指标</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">集群和分布式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.</span> <span class="toc-text">概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dubbo%E6%9E%B6%E6%9E%84"><span class="toc-number">1.2.1.</span> <span class="toc-text">Dubbo架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">Dubbo的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E7%BC%93%E5%AD%98"><span class="toc-number">1.3.1.</span> <span class="toc-text">地址缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E5%92%8C%E9%87%8D%E8%AF%95"><span class="toc-number">1.3.2.</span> <span class="toc-text">超时和重试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%97%B6"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">超时</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%AF%95"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">重试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%89%88%E6%9C%AC"><span class="toc-number">1.3.3.</span> <span class="toc-text">多版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">1.3.4.</span> <span class="toc-text">负载均衡</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ConsistentHashLoadBalance-%E4%B8%80%E8%87%B4%E6%80%A7Hash%E7%AE%97%E6%B3%95-%EF%BC%8C%E8%BF%98%E6%B2%A1%E6%90%9E%E6%87%82"><span class="toc-number">2.</span> <span class="toc-text">ConsistentHashLoadBalance: 一致性Hash算法 ，还没搞懂</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9B%86%E7%BE%A4%E5%AE%B9%E9%94%99"><span class="toc-number">2.0.1.</span> <span class="toc-text">集群容错</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/%E4%B8%80%E4%BA%9B%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.880Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/SpringMVC/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.877Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/SpringCloudAlibaba/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.875Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/Pytorch/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.869Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/JWT/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.866Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 学不动学不懂学步冻</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
