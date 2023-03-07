@@ -1,0 +1,254 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>MyBlog | MyBlog</title><meta name="author" content="学不动学不懂学步冻"><meta name="copyright" content="学不动学不懂学步冻"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Dubbo 2.7.7~2.7.8为什么要用Dubbo 服务治理框架 服务的监控 服务的注册和发现 服务的通信 服务的容错 负载均衡  Dubbo的工作原理 SpringCloudAlibaba 组件： Sentinel:把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性 Nacos：一个更容易构建云原生应用的动态服务发现、配置管理和服务管理平台 RocketMQ：一款">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBlog">
+<meta property="og:url" content="http://example.com/2023/03/07/SpringCloudAlibaba/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="Dubbo 2.7.7~2.7.8为什么要用Dubbo 服务治理框架 服务的监控 服务的注册和发现 服务的通信 服务的容错 负载均衡  Dubbo的工作原理 SpringCloudAlibaba 组件： Sentinel:把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性 Nacos：一个更容易构建云原生应用的动态服务发现、配置管理和服务管理平台 RocketMQ：一款">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/118332734?v=4">
+<meta property="article:published_time" content="2023-03-07T09:48:52.875Z">
+<meta property="article:modified_time" content="2023-02-18T05:13:34.464Z">
+<meta property="article:author" content="学不动学不懂学步冻">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/118332734?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/03/07/SpringCloudAlibaba/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MyBlog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-18 13:13:34'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="MyBlog"><img class="site-icon" src="D:\Blog\ZFsBlog\themes\butterfly\images\headSculpture.png"/><span class="site-name">MyBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-07T09:48:52.875Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-18T05:13:34.464Z" title="更新于 2023-02-18 13:13:34">2023-02-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Dubbo-2-7-7-2-7-8"><a href="#Dubbo-2-7-7-2-7-8" class="headerlink" title="Dubbo 2.7.7~2.7.8"></a>Dubbo 2.7.7~2.7.8</h1><h2 id="为什么要用Dubbo"><a href="#为什么要用Dubbo" class="headerlink" title="为什么要用Dubbo"></a>为什么要用Dubbo</h2><ul>
+<li>服务治理框架</li>
+<li>服务的监控</li>
+<li>服务的注册和发现</li>
+<li>服务的通信</li>
+<li>服务的容错</li>
+<li>负载均衡</li>
+</ul>
+<h2 id="Dubbo的工作原理"><a href="#Dubbo的工作原理" class="headerlink" title="Dubbo的工作原理"></a>Dubbo的工作原理</h2><p><img src="https://img.hasdsd.cn/imgimage-20230217010016934.png" alt="image-20230217010016934"></p>
+<h1 id="SpringCloudAlibaba"><a href="#SpringCloudAlibaba" class="headerlink" title="SpringCloudAlibaba"></a>SpringCloudAlibaba</h1><p><img src="https://img.hasdsd.cn/imgimage-20230214142534807.png" alt="image-20230214142534807"></p>
+<h2 id="组件："><a href="#组件：" class="headerlink" title="组件："></a>组件：</h2><ul>
+<li>Sentinel:把流量作为切入点，从流量控制、熔断降级、系统负载保护等多个维度保护服务的稳定性</li>
+<li>Nacos：一个更容易构建云原生应用的动态服务发现、配置管理和服务管理平台</li>
+<li>RocketMQ：一款开源的分布式消息系统，基于高可用分布式集群技术，提供低延时的，高可用的消息发布与订阅</li>
+<li>Dubbo：Apache Dubbo是一款高性能的Java RPC框架</li>
+<li>Seata：阿里巴巴的开源产品，一个易于使用的高性能微服务分布式解决方案</li>
+<li>Alibaba Cloud ACM：一款在分布式架构环境中对应用配置进行集中管理和推送的应用配置中心产品</li>
+<li>Alibaba Cloud OSS：阿里云对象存储服务（Object storage Service 简称OSS），是阿里云提供海量、安全、低成本、高可靠的云存储服务。可以在任何应用任何时间、任何地点存储和访问任意类型的数据</li>
+<li>Alibaba Cloud schedulerX：阿里中间件团队开发的一款分布式任务调度产品，提供秒杀、精准、高可靠、高可用的定时（基于Cron表达式）任务调度服务</li>
+<li>Alibaba Cloud SMS：覆盖全球的短信服务，友好、高效、智能的胡莲花通讯能力，帮助企业迅速搭建客户触达通道</li>
+</ul>
+<h3 id="两个微服务之间的调用"><a href="#两个微服务之间的调用" class="headerlink" title="两个微服务之间的调用"></a>两个微服务之间的调用</h3><p>​	restFulAPI下有一个restTemplate拿到映射地址直接扔进去然后带着参数和返回值类型</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230215165834688.png" alt="image-20230215165834688"></p>
+<ol>
+<li>服务发现： <ol>
+<li>服务注册：保存服务提供者和服务调用者的信息 </li>
+<li>服务订阅：服务调用者订阅服务提供者的信息，注册中心向订阅者推送提供者的信息</li>
+</ol>
+</li>
+<li>. 服务配置：<ol>
+<li>配置订阅：服务提供者和服务调用者订阅微服务相关的配置</li>
+<li>配置下发：主动将配置推送给服务提供者和服务调用者</li>
+</ol>
+</li>
+<li>服务健康检测 检测服务提供者的健康情况，如果发现异常，执行服务剔除</li>
+</ol>
+<h2 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Nacos是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台，他是SpringCloud Alibaba组件之一，负责服务注册发现和服务配置，可以这样任务nacos &#x3D; eureka+config</p>
+<p>Nacos致力于帮助开发者发现、配置和管理微服务，Nacos提供了一组简单易用的特性集，帮助您快速实现动态发现、服务配置、服务元数据以及流量管理</p>
+<p>上面介绍可以看出nacos的作用就是一个注册中心，用来管理注册上来的各个服务</p>
+<h3 id="Nacos入门"><a href="#Nacos入门" class="headerlink" title="Nacos入门"></a>Nacos入门</h3><h4 id="安装nacos"><a href="#安装nacos" class="headerlink" title="安装nacos"></a>安装nacos</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">下载地址: https://github.com/alibaba/nacos/releases</span><br><span class="line">下载zip格式的安装包，然后进行解压缩操作</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动nacos"><a href="#启动nacos" class="headerlink" title="启动nacos"></a>启动nacos</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#切换目录</span></span><br><span class="line"><span class="built_in">cd</span> nacos/bin</span><br><span class="line"><span class="comment">#命令启动</span></span><br><span class="line">startup.cmd -m standalone</span><br></pre></td></tr></table></figure>
+
+<h4 id="访问nacos"><a href="#访问nacos" class="headerlink" title="访问nacos"></a>访问nacos</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">打开浏览器输入http://localhost:8848/nacos，即可访问服务， 默认密码是nacos/nacos</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.hasdsd.cn/imgimage-20230215170329540.png" alt="image-20230215170329540"></p>
+<h4 id="将商品服务注册到nacos中"><a href="#将商品服务注册到nacos中" class="headerlink" title="将商品服务注册到nacos中"></a>将商品服务注册到nacos中</h4><p><img src="https://img.hasdsd.cn/imgimage-20230215170529492.png" alt="image-20230215170529492"></p>
+<p>例：在shop-product服务中添加nacos</p>
+<p>首先导入依赖坐标</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--nacos客户端--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在启动类ProductApplication中添加注解 @EnableDiscoveryClient</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230215224644128.png" alt="image-20230215224644128"></p>
+<p>再向Application.yaml中添加配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"> <span class="attr">cloud:</span></span><br><span class="line">   <span class="attr">nacos:</span></span><br><span class="line">     <span class="attr">discovery:</span></span><br><span class="line">       <span class="attr">server-addr:</span> <span class="string">localhost:8848</span></span><br></pre></td></tr></table></figure>
+
+<p>启动shop-product服务模块，登录nacos，点进服务管理中的服务列表，我们可以看到</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230215225221114.png" alt="image-20230215225221114"></p>
+<p>其中服务者名称为 service-product其实就是我们配置文件下的</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">service-product</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="利用Nacos实现服务发现"><a href="#利用Nacos实现服务发现" class="headerlink" title="利用Nacos实现服务发现"></a>利用Nacos实现服务发现</h4><p>利用传统的RestFul接口我们只能请求固定字符串中的URL地址，如果有两个商品服务呢，我们该怎么调用</p>
+<p>这里需要我们去注入Nacos的一个类 ：<strong>DiscoveryClient</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> RestTemplate restTemplate;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> OrderService orderService;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> DiscoveryClient discoveryClient;</span><br><span class="line"><span class="meta">@GetMapping(&quot;/order/prod/&#123;pid&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Order <span class="title function_">order</span><span class="params">(<span class="meta">@PathVariable(&quot;pid&quot;)</span> <span class="type">int</span> pid)</span>&#123;</span><br><span class="line">   log.info(<span class="string">&quot;接收&#123;&#125;号商品的下单请求,接下来调用商品微服务查询商品&quot;</span>,pid);</span><br><span class="line">   List&lt;ServiceInstance&gt; instances = discoveryClient.getInstances(<span class="string">&quot;service-product&quot;</span>); </span><br><span class="line">   <span class="type">ServiceInstance</span> <span class="variable">serviceInstance</span> <span class="operator">=</span> instances.get(<span class="number">0</span>); <span class="comment">//ServiceInstance的类中封装了对应对象的各种信息（如下图）</span></span><br><span class="line">    Product product=restTemplate.getForObject(<span class="string">&quot;http://&quot;</span>+Instance.getHost()+<span class="string">&quot;:&quot;</span>+Instance.getPort()+<span class="string">&quot;/product/&quot;</span>+pid,Product.class);</span><br><span class="line">    <span class="comment">//对URL进行拼接</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.hasdsd.cn/imgimage-20230215233728440.png" alt="image-20230215233728440"></p>
+<p>但问题来了，当我们的商品服务不止一个呢，有多个呢，instances.get()方法中的参数不能一直是0，所以我们接下来要做<strong>负载均衡</strong></p>
+<h4 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h4><p><img src="https://img.hasdsd.cn/imgimage-20230215234103649.png" alt="image-20230215234103649"></p>
+<h5 id="什么是负载均衡"><a href="#什么是负载均衡" class="headerlink" title="什么是负载均衡?"></a>什么是负载均衡?</h5><p>通俗的将，负载均衡就是将负载（工作任务，访问请求）进行分摊到多个单元（服务器组件上进行）。根据负载均衡的发声位置不同，一般分为服务端负载均衡和客户端负载均衡</p>
+<ul>
+<li>服务端负载均衡是指发生在服务提供者一方，比如常见的nginx负载均衡</li>
+<li>而客户端负载均衡是指：发生在服务端请求一方，也就是在发送请求之前就已经选好了由哪个实例处理请求</li>
+</ul>
+<p><img src="https://img.hasdsd.cn/imgimage-20230215234539316.png" alt="image-20230215234539316"></p>
+<p>那么我们将如何实现客户端的负载均衡呢？（看下一章）</p>
+<h2 id="Ribbon"><a href="#Ribbon" class="headerlink" title="Ribbon"></a>Ribbon</h2><h3 id="什么是Ribbon？"><a href="#什么是Ribbon？" class="headerlink" title="什么是Ribbon？"></a>什么是Ribbon？</h3><p>Ribbon是SpringCloud的一个组件，他让我们使用一个注解就可以轻松的搞定服务端的负载均衡</p>
+<p>在演示之前我们要对一个服务进行创建几个实例，修改虚拟机中的配置，-Dserver.port&#x3D;8082 -Dserver.port&#x3D;8083</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230216002514357.png" alt="image-20230216002514357"></p>
+<h3 id="利用Ribbon进行负载均衡处理"><a href="#利用Ribbon进行负载均衡处理" class="headerlink" title="利用Ribbon进行负载均衡处理"></a>利用Ribbon进行负载均衡处理</h3><p>在OrderApplication（请求端启动类）中的	RestTemplate中添加注解@LoadBalanced（负载均衡）</p>
+<p>在OrderController中直接去请求product模块服务，将之前的主机号和端口号省去变成了 服务名（service-product）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Order <span class="title function_">order</span><span class="params">(<span class="meta">@PathVariable(&quot;pid&quot;)</span> <span class="type">int</span> pid)</span>&#123;</span><br><span class="line">   log.info(<span class="string">&quot;接收&#123;&#125;号商品的下单请求,接下来调用商品微服务查询商品&quot;</span>,pid);</span><br><span class="line"></span><br><span class="line">    Product product=</span><br><span class="line">            restTemplate.getForObject(<span class="string">&quot;http://service-product/product/&quot;</span>+pid,Product.class);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Rebbin的负载均衡策略"><a href="#Rebbin的负载均衡策略" class="headerlink" title="Rebbin的负载均衡策略"></a>Rebbin的负载均衡策略</h3><p>其中RandomRule表示随机策略、RoundRobinRule表示轮询策略、WeightedResponseTimeRule表示加权策略、BestAvailableRule表示请求数最少策略等等。</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230216005005097.png" alt="image-20230216005005097"></p>
+<p>我们可以通过修改配置来调整Ribbon的负载均衡策略，具体代码如下</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">service-product:</span> <span class="comment"># 调用的提供者的名称 </span></span><br><span class="line">	<span class="attr">ribbon:</span> <span class="string">NFLoadBalancerRule</span></span><br><span class="line">		<span class="attr">ClassName:</span> <span class="string">com.netflix.loadbalancer.RandomRule</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h2><h3 id="什么是feign"><a href="#什么是feign" class="headerlink" title="什么是feign"></a>什么是feign</h3><p>Feign是SpringCloud提供的一个生命是伪Http客户端，踏实的调用远程服务就好像调用本地服务一样简单，只需要创建一个接口并添加一个注解即可</p>
+<p>Nacos很好的兼容了Feign，Feign默认集成了Ribbon，所以在Nacos下使用Feign默认就实现了负载均衡的效果</p>
+<h3 id="Feign的使用"><a href="#Feign的使用" class="headerlink" title="Feign的使用"></a>Feign的使用</h3><h4 id="加入feign依赖"><a href="#加入feign依赖" class="headerlink" title="加入feign依赖"></a>加入feign依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--fegin组件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">学不动学不懂学步冻</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/07/SpringCloudAlibaba/">http://example.com/2023/03/07/SpringCloudAlibaba/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">MyBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/118332734?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/07/SpringMVC/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/2023/03/07/Spring/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">学不动学不懂学步冻</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zzzzzf2001" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="/zzzzzf011129@163.com" target="_blank" title=""><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Dubbo-2-7-7-2-7-8"><span class="toc-number">1.</span> <span class="toc-text">Dubbo 2.7.7~2.7.8</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8Dubbo"><span class="toc-number">1.1.</span> <span class="toc-text">为什么要用Dubbo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dubbo%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">Dubbo的工作原理</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringCloudAlibaba"><span class="toc-number">2.</span> <span class="toc-text">SpringCloudAlibaba</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%EF%BC%9A"><span class="toc-number">2.1.</span> <span class="toc-text">组件：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E4%B8%AA%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B0%83%E7%94%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">两个微服务之间的调用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nacos"><span class="toc-number">2.2.</span> <span class="toc-text">Nacos</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">2.2.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nacos%E5%85%A5%E9%97%A8"><span class="toc-number">2.2.2.</span> <span class="toc-text">Nacos入门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nacos"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">安装nacos</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8nacos"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">启动nacos</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BF%E9%97%AEnacos"><span class="toc-number">2.2.2.3.</span> <span class="toc-text">访问nacos</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%86%E5%95%86%E5%93%81%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E5%88%B0nacos%E4%B8%AD"><span class="toc-number">2.2.2.4.</span> <span class="toc-text">将商品服务注册到nacos中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A9%E7%94%A8Nacos%E5%AE%9E%E7%8E%B0%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0"><span class="toc-number">2.2.2.5.</span> <span class="toc-text">利用Nacos实现服务发现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">2.2.2.6.</span> <span class="toc-text">负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">2.2.2.6.1.</span> <span class="toc-text">什么是负载均衡?</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ribbon"><span class="toc-number">2.3.</span> <span class="toc-text">Ribbon</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRibbon%EF%BC%9F"><span class="toc-number">2.3.1.</span> <span class="toc-text">什么是Ribbon？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8Ribbon%E8%BF%9B%E8%A1%8C%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%A4%84%E7%90%86"><span class="toc-number">2.3.2.</span> <span class="toc-text">利用Ribbon进行负载均衡处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Rebbin%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5"><span class="toc-number">2.3.3.</span> <span class="toc-text">Rebbin的负载均衡策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Feign"><span class="toc-number">2.4.</span> <span class="toc-text">Feign</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFfeign"><span class="toc-number">2.4.1.</span> <span class="toc-text">什么是feign</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Feign%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.4.2.</span> <span class="toc-text">Feign的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A0%E5%85%A5feign%E4%BE%9D%E8%B5%96"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">加入feign依赖</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/%E4%B8%80%E4%BA%9B%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.880Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/Vue/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.878Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/SpringMVC/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.877Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/SpringCloudAlibaba/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.875Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/07/Spring/" title="无题">无题</a><time datetime="2023-03-07T09:48:52.873Z" title="发表于 2023-03-07 17:48:52">2023-03-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 学不动学不懂学步冻</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
