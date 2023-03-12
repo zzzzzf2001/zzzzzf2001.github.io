@@ -1,0 +1,275 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>MyBlog | MyBlog</title><meta name="author" content="学不动学不懂学步冻"><meta name="copyright" content="学不动学不懂学步冻"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git什么是Git Git是一个开源的、分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目 Git易于学习，占地面积小，性能极快，它具有廉价的本地库，方便的暂存区域和多个工作流分支 简介版本控制什么是版本控制版本控制是一种记录文件内容变化，以便将来查阅特定版本修订情况的系统 版本控制最重要的是可以记录文件修改历史记录，从而让用户能够查看历史版本，方便版本切换 为什么需要分布式版本控制个人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBlog">
+<meta property="og:url" content="http://example.com/2023/03/13/Git/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="Git什么是Git Git是一个开源的、分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目 Git易于学习，占地面积小，性能极快，它具有廉价的本地库，方便的暂存区域和多个工作流分支 简介版本控制什么是版本控制版本控制是一种记录文件内容变化，以便将来查阅特定版本修订情况的系统 版本控制最重要的是可以记录文件修改历史记录，从而让用户能够查看历史版本，方便版本切换 为什么需要分布式版本控制个人">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/118332734?v=4">
+<meta property="article:published_time" content="2023-03-12T16:09:05.573Z">
+<meta property="article:modified_time" content="2023-03-12T16:08:15.062Z">
+<meta property="article:author" content="学不动学不懂学步冻">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/118332734?v=4"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/03/13/Git/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MyBlog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-13 00:08:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="MyBlog"><img class="site-icon" src="https://img.hasdsd.cn/imgfb2ae9dbdd3daa91c227a2134d61fa92ae2c861c_full.jpg"/><span class="site-name">MyBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-12T16:09:05.573Z" title="发表于 2023-03-13 00:09:05">2023-03-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-12T16:08:15.062Z" title="更新于 2023-03-13 00:08:15">2023-03-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><p>什么是Git</p>
+<p>Git是一个开源的、分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目</p>
+<p>Git易于学习，占地面积小，性能极快，它具有廉价的本地库，方便的暂存区域和多个工作流分支</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><h3 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h3><h4 id="什么是版本控制"><a href="#什么是版本控制" class="headerlink" title="什么是版本控制"></a>什么是版本控制</h4><p>版本控制是一种记录文件内容变化，以便将来查阅特定版本修订情况的系统</p>
+<p>版本控制最重要的是可以记录文件修改历史记录，从而让用户能够查看历史版本，方便版本切换</p>
+<h4 id="为什么需要分布式版本控制"><a href="#为什么需要分布式版本控制" class="headerlink" title="为什么需要分布式版本控制"></a>为什么需要分布式版本控制</h4><p>个人开发过渡到团队合作</p>
+<p>相对于集中式版本控制，分布式版本控制在断网的情况下也可以进行开发（因为版本控制是在本地进行的），每个客户端保存的也都是整个完整的项目（包含历史记录）</p>
+<h3 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h3><p><img src="https://img.hasdsd.cn/imgimage-20230310141705286.png" alt="image-20230310141705286"></p>
+<p>当我们的代码在工作区和暂存区时，管理员是看不到我们的代码的，我们可以对这时的代码进行删除或者修改操作，当我们提交到本地库后，git会帮我们生成一个历史版本，此时的代码是无法删除和修改的	</p>
+<h3 id="代码托管中心"><a href="#代码托管中心" class="headerlink" title="代码托管中心"></a>代码托管中心</h3><p>代码托管中心是基于网络服务器的远程代码仓库，一般我们简单称为远程库</p>
+<ul>
+<li>局域网远程库：GitLab</li>
+<li>互联网远程库：GitHub、Gitee</li>
+</ul>
+<h2 id="Git的常用命令"><a href="#Git的常用命令" class="headerlink" title="Git的常用命令"></a>Git的常用命令</h2><p><img src="https://img.hasdsd.cn/imgimage-20230310142630971.png" alt="image-20230310142630971"></p>
+<p>初用Git要先设置用户签名和用户的邮箱使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name XXX</span><br><span class="line">git config --global user.email XXX@XX.com</span><br></pre></td></tr></table></figure>
+
+<p>在我们的本地C盘用户目录下我们可以看到一个文件 .gitconfig</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310143241288.png" alt="image-20230310143241288"></p>
+<h3 id="初始化本地库"><a href="#初始化本地库" class="headerlink" title="初始化本地库"></a>初始化本地库</h3><p>git init </p>
+<p>我们创建一个文件夹后，若先用git进行版本控制首先要进行git初始化</p>
+<p>进入该文件夹后打开git bash 然后输入命令 git init</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310144022051.png" alt="image-20230310144022051"></p>
+<p>会在我们的文件夹下生成</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310144042589.png" alt="image-20230310144042589"></p>
+<h3 id="查询本地库状态"><a href="#查询本地库状态" class="headerlink" title="查询本地库状态"></a>查询本地库状态</h3><p>git status</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310144655688.png" alt="image-20230310144655688"></p>
+<p>其中输出的日志表示为：在master分支下，并没有可提交的文件，但是有一个未被追踪的文件(hello.txt),现在没有任何除了违背追踪的文件要被添加提交（使用“git add”去追踪）</p>
+<p>此处的add即为从工作区添加到暂存区，表示为暂存区没有文件要被提交</p>
+<h3 id="添加暂存区"><a href="#添加暂存区" class="headerlink" title="添加暂存区"></a>添加暂存区</h3><p>git add</p>
+<p>我们将 hello.txt添加到暂存区,警告可忽视</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310145210006.png" alt="image-20230310145210006"></p>
+<p>这时我们在看本地库的状态</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310145301271.png" alt="image-20230310145301271"></p>
+<p>我们可以发现原先未被追踪的hello.txt变成了绿色，这里表示为暂存区追踪到了hello.txt，且 git有提示，可以使用“git rm –cached 文件名”去进行暂存区删除</p>
+<p><strong><img src="https://img.hasdsd.cn/imgimage-20230310145552748.png" alt="image-20230310145552748"></strong></p>
+<h3 id="文件提交本地库"><a href="#文件提交本地库" class="headerlink" title="文件提交本地库"></a>文件提交本地库</h3><p>git commit -m “日志信息” 文件名</p>
+<p>左红框为版本号，右红框为我们输入的日志信息</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310145935573.png" alt="image-20230310145935573"></p>
+<p>这时我们再去查看状态，相比较于之前已经没有了 No commits yet 说明我们已经提交过了。下面的一句nothing to commit ,working tree clean意思是没有东西修改过，工作树是空的</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310150211249.png" alt="image-20230310150211249"></p>
+<p>我们对hello.txt文件进行内容的修改然后再次提交后，添加了其他日志信息，那怎么去看提交的日志信息呢？</p>
+<p>git reflog</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310150913578.png" alt="image-20230310150913578"></p>
+<p>如何去细致的看日志信息呢</p>
+<p>git log</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310151025795.png" alt="image-20230310151025795"></p>
+<p>在这里我们可以看到完整版的版本号，和提交者的用户签名还有邮箱签名 以及提交时间和提交日志</p>
+<h3 id="版本穿梭"><a href="#版本穿梭" class="headerlink" title="版本穿梭"></a>版本穿梭</h3><p>git reset –hard 版本号</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310151919471.png" alt="image-20230310151919471"></p>
+<p>日志中可以看到这个操作 </p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310152116026.png" alt="image-20230310152116026"></p>
+<p>倘若我们回到最初的hello.txt中，此时</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310152226351.png" alt="image-20230310152226351"></p>
+<p>倘若我们回到 最新的 hello.txt中</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310152324256.png" alt="image-20230310152324256"></p>
+<p>我们还可以在初始化时生成的git文件中查询到当前处于那个分支的哪个版本下</p>
+<p>打开文件夹打开HEAD我们可以发现<img src="https://img.hasdsd.cn/imgimage-20230310152604192.png" alt="image-20230310152604192"></p>
+<p>再打开HEAD 文件中的路径我们可以发现<img src="https://img.hasdsd.cn/imgimage-20230310152712144.png" alt="image-20230310152712144"></p>
+<p>我们当前处于此版本号版本下 我们去查看得知正是该版本</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310152820360.png" alt="image-20230310152820360"></p>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><h3 id="什么是分支"><a href="#什么是分支" class="headerlink" title="什么是分支"></a>什么是分支</h3><p>可以这么理解分支，本人呢学习忍术多年，终于有一天学会了禁术——多重影分身之术，我非常开心，可以让这么多分身去学其他的技术，陆陆续续的有影分身（分支）回到了我本来的身体中，他学会了RabbitMQ，所以我也学会了RabbitMQ，还有的影分身学会了Zookeeper，学会了Redis。。。。。。。。所以我都学会了，但是回来一个影分身告诉我他没学会编译原理（因为是真特么难），我摸摸头告诉他没事。对我个人而言并不影响我自己继续生活学习，但同时我学会了这么多知识，这就是分支</p>
+<p>分支可以使得各个部门同时进行开发各个组件，而不影响主业务的开发</p>
+<h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><p><img src="https://img.hasdsd.cn/imgimage-20230310204814675.png" alt="image-20230310204814675"></p>
+<h4 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h4><p>git branch -v</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310210316703.png" alt="image-20230310210316703"></p>
+<p>​	当前分支为 master 版本为ocd62f3 日志为 是真的帅</p>
+<h4 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h4><p>git branch 分支名</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310210550553.png" alt="image-20230310210550553"></p>
+<p>我们不难发现，创建的分支除了分支名和当前分支不一样，版本号和日志都一样</p>
+<h4 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h4><p>git checkout 分支名</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310210935549.png" alt="image-20230310210935549"></p>
+<p>该命令行中日志输出为已切换到分支hot-fix，当查看节点时hot-fix节点变为绿色，也说明当前分支为hot-fix</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230310211337855.png" alt="image-20230310211337855"></p>
+<h4 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h4><p>git merge 分支名</p>
+<p>表示为将指定的分支与当前分支合并，以两个列表（列表中的元素相同但所处对应位置不同也不算等价列表）表示两个节点的不同文件，倘若 本节点的改文件包含于或被包含于另一个文件，则这两个文件就可以合并成功，该节点的文件内容</p>
+<h3 id="分支合并冲突"><a href="#分支合并冲突" class="headerlink" title="分支合并冲突"></a>分支合并冲突</h3><p>分支合并冲突是一件非常有意思的事情，当我们合并时 节点A 的文件1相较于原文件有了至少一出修改（已提交），正好节点B对文件1也进行了修改并与节点A修改了同一处位置，但内容不同，这时二者合并时就会出现问题？</p>
+<p>同时修改的那基础到底如何合并，是保留A节点此处内容还是保留B节点此处内容。当合并时直接报错，出现如下图的内容</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230311003836367.png" alt="image-20230311003836367"></p>
+<p>这种报错即为 <strong>分支合并冲突</strong></p>
+<p>当出现分支合并冲突时，我们需要对该文件进行修改，确保保留的是哪个分支上的内容</p>
+<h2 id="Git团队协作机制"><a href="#Git团队协作机制" class="headerlink" title="Git团队协作机制"></a>Git团队协作机制</h2><h3 id="团队内协作"><a href="#团队内协作" class="headerlink" title="团队内协作"></a>团队内协作</h3><p><img src="https://img.hasdsd.cn/imgimage-20230311131236992.png" alt="image-20230311131236992"></p>
+<p>团队协作的大致流程：</p>
+<p>岳不群是华山派掌门人，他创建了华山剑法，推送（git push）到托管中心，恰好令狐冲是他的徒弟，此时的令狐冲并不会剑法（本地无源码），需要学习剑法，</p>
+<p>所以需要获取那本书（git clone），令狐冲天资聪慧是练武奇才，不仅学会了华山剑法，还在基础上创建了新的招式，于是也加入到华山剑法中返回（git push）给托管中心，岳不群大悦（本地有源文件），于是将托管中心的书拿过来（pull）看了看，也学习了一下新招式</p>
+<h3 id="跨团队协作"><a href="#跨团队协作" class="headerlink" title="跨团队协作"></a>跨团队协作</h3><p><img src="https://img.hasdsd.cn/imgimage-20230311132738238.png" alt="image-20230311132738238"></p>
+<p>跨团队协作流程：</p>
+<p>岳不群认为自己的华山剑法不够强劲，所以去找其他派的人来帮忙升级斧正一下，于是找到了日月教派CEO东方不败，东方不败同意后</p>
+<p>①东方不败在岳不群的远程库中把华山剑法fork到了自己的远程库中，然后</p>
+<p>②放到本地，一顿改正后，华山剑法改为了辟邪剑法，然后</p>
+<p>③放到自己的远程库，</p>
+<p>④又由自己的远程库向岳不群的远程库提出pull request</p>
+<p>⑤岳不群在看完辟邪剑法后感觉非常的不错，质量很高（用法除外）</p>
+<p>⑥将原先的华山剑法和现在的辟邪剑法进行合并merge</p>
+<p>7 岳不群大悦pro，赶紧把远程库中的辟邪剑法拉到自己的本地库中，顺便问了问令狐冲要不要一起练</p>
+<h2 id="Github实战"><a href="#Github实战" class="headerlink" title="Github实战"></a>Github实战</h2><h3 id="远程仓库操作"><a href="#远程仓库操作" class="headerlink" title="远程仓库操作"></a>远程仓库操作</h3><p><img src="https://img.hasdsd.cn/imgimage-20230311134617484.png" alt="image-20230311134617484"></p>
+<p>创建远程仓库别名</p>
+<p>git remote -v 查看当前所有远程地址别名</p>
+<p>git remote add 别名 远程地址</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230311134839495.png" alt="image-20230311134839495"></p>
+<h3 id="本地库的分支推送"><a href="#本地库的分支推送" class="headerlink" title="本地库的分支推送"></a>本地库的分支推送</h3><p>git push   链接（别名） 分支</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230311164148163.png" alt="image-20230311164148163"></p>
+<h3 id="远程库的分支拉取"><a href="#远程库的分支拉取" class="headerlink" title="远程库的分支拉取"></a>远程库的分支拉取</h3><p>git pull  链接（别名） 分支</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230311170146163.png" alt="image-20230311170146163"></p>
+<h3 id="远程库的克隆"><a href="#远程库的克隆" class="headerlink" title="远程库的克隆"></a>远程库的克隆</h3><p>git clone  链接（别名） 	</p>
+<h3 id="团队内协作-1"><a href="#团队内协作-1" class="headerlink" title="团队内协作"></a>团队内协作</h3><p>邀请其他用户一起完成项目</p>
+<p>首先进入github 首页，然后进入设置（setting），而后点进仓库（Repositories），然后点入</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230311171328228.png" alt="image-20230311171328228"></p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230311171349168.png" alt="image-20230311171349168"></p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230311171526834.png" alt="image-20230311171526834"></p>
+<p>复制下来然后将连接发给他，好有在接受连接后直接进入链接，同意加入，即可称为团队内成员</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">学不动学不懂学步冻</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/13/Git/">http://example.com/2023/03/13/Git/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">MyBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://avatars.githubusercontent.com/u/118332734?v=4" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/03/05/SpringBoot/" title="SpringBoot"><img class="cover" src="https://img.hasdsd.cn/imgQQ截图20230307190709.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SpringBoot</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">学不动学不懂学步冻</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zzzzzf2001"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zzzzzf2001" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="/zzzzzf011129@163.com" target="_blank" title=""><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git"><span class="toc-number">1.</span> <span class="toc-text">Git</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">版本控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">什么是版本控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%88%86%E5%B8%83%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">为什么需要分布式版本控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">1.1.2.</span> <span class="toc-text">工作机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%89%98%E7%AE%A1%E4%B8%AD%E5%BF%83"><span class="toc-number">1.1.3.</span> <span class="toc-text">代码托管中心</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">Git的常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E5%BA%93"><span class="toc-number">1.2.1.</span> <span class="toc-text">初始化本地库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%9C%AC%E5%9C%B0%E5%BA%93%E7%8A%B6%E6%80%81"><span class="toc-number">1.2.2.</span> <span class="toc-text">查询本地库状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">1.2.3.</span> <span class="toc-text">添加暂存区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8F%90%E4%BA%A4%E6%9C%AC%E5%9C%B0%E5%BA%93"><span class="toc-number">1.2.4.</span> <span class="toc-text">文件提交本地库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E7%A9%BF%E6%A2%AD"><span class="toc-number">1.2.5.</span> <span class="toc-text">版本穿梭</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF"><span class="toc-number">1.3.</span> <span class="toc-text">分支</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E6%94%AF"><span class="toc-number">1.3.1.</span> <span class="toc-text">什么是分支</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.2.</span> <span class="toc-text">分支操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">查看分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">切换分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">分支合并</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E5%90%88%E5%B9%B6%E5%86%B2%E7%AA%81"><span class="toc-number">1.3.3.</span> <span class="toc-text">分支合并冲突</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">Git团队协作机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%A2%E9%98%9F%E5%86%85%E5%8D%8F%E4%BD%9C"><span class="toc-number">1.4.1.</span> <span class="toc-text">团队内协作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%A8%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C"><span class="toc-number">1.4.2.</span> <span class="toc-text">跨团队协作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github%E5%AE%9E%E6%88%98"><span class="toc-number">1.5.</span> <span class="toc-text">Github实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-number">1.5.1.</span> <span class="toc-text">远程仓库操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%BA%93%E7%9A%84%E5%88%86%E6%94%AF%E6%8E%A8%E9%80%81"><span class="toc-number">1.5.2.</span> <span class="toc-text">本地库的分支推送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%BA%93%E7%9A%84%E5%88%86%E6%94%AF%E6%8B%89%E5%8F%96"><span class="toc-number">1.5.3.</span> <span class="toc-text">远程库的分支拉取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%BA%93%E7%9A%84%E5%85%8B%E9%9A%86"><span class="toc-number">1.5.4.</span> <span class="toc-text">远程库的克隆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%A2%E9%98%9F%E5%86%85%E5%8D%8F%E4%BD%9C-1"><span class="toc-number">1.5.5.</span> <span class="toc-text">团队内协作</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/13/Git/" title="无题">无题</a><time datetime="2023-03-12T16:09:05.573Z" title="发表于 2023-03-13 00:09:05">2023-03-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/05/SpringBoot/" title="SpringBoot"><img src="https://img.hasdsd.cn/imgQQ截图20230307190709.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringBoot"/></a><div class="content"><a class="title" href="/2023/03/05/SpringBoot/" title="SpringBoot">SpringBoot</a><time datetime="2023-03-04T16:00:00.000Z" title="发表于 2023-03-05 00:00:00">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/05/zookeeper/" title="Zookeeper"><img src="https://img.hasdsd.cn/imgzookeeper.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Zookeeper"/></a><div class="content"><a class="title" href="/2023/03/05/zookeeper/" title="Zookeeper">Zookeeper</a><time datetime="2023-03-04T16:00:00.000Z" title="发表于 2023-03-05 00:00:00">2023-03-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/03/05/SpringCloud/" title="SpringCloud"><img src="https://img.hasdsd.cn/imgc3d674d122e8490686a667ef2264ffd4.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SpringCloud"/></a><div class="content"><a class="title" href="/2023/03/05/SpringCloud/" title="SpringCloud">SpringCloud</a><time datetime="2023-03-04T16:00:00.000Z" title="发表于 2023-03-05 00:00:00">2023-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/05/JUC/" title="JUC">JUC</a><time datetime="2023-03-04T16:00:00.000Z" title="发表于 2023-03-05 00:00:00">2023-03-05</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 学不动学不懂学步冻</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
