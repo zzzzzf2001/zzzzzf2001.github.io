@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>MyBlog | MyBlog</title><meta name="author" content="学不动学不懂学步冻"><meta name="copyright" content="学不动学不懂学步冻"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Mysql高级篇存储引擎mysql体系结构 存储引擎简介飞机、直升飞机、火箭 ，他们的动力都来自于引擎，但是因为应用类型的不同，所以将引擎也不会相同。不能将火箭的引擎放到直升飞机中，反之更不行，所以引擎的使用和应用场景有着十分重要的关系  存储引擎就是存储数据、建立索引、更新&#x2F;查询数据等技术的实现方式。存储引擎是基于表的而不是基于库的，所以存储引擎也可被称为表类型。 我们看一下emp的建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBlog">
+<meta property="og:url" content="http://example.com/2023/04/17/Mysql%E9%AB%98%E7%BA%A7%E7%AF%87/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="Mysql高级篇存储引擎mysql体系结构 存储引擎简介飞机、直升飞机、火箭 ，他们的动力都来自于引擎，但是因为应用类型的不同，所以将引擎也不会相同。不能将火箭的引擎放到直升飞机中，反之更不行，所以引擎的使用和应用场景有着十分重要的关系  存储引擎就是存储数据、建立索引、更新&#x2F;查询数据等技术的实现方式。存储引擎是基于表的而不是基于库的，所以存储引擎也可被称为表类型。 我们看一下emp的建">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.hasdsd.cn/imgQQ%E6%88%AA%E5%9B%BE20230417200016.jpg">
+<meta property="article:published_time" content="2023-04-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-17T13:43:01.986Z">
+<meta property="article:author" content="学不动学不懂学步冻">
+<meta property="article:tag" content="mysql高级">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.hasdsd.cn/imgQQ%E6%88%AA%E5%9B%BE20230417200016.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/04/17/Mysql%E9%AB%98%E7%BA%A7%E7%AF%87/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MyBlog',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-17 21:43:01'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url('https://img.hasdsd.cn/imgQQ截图20230417200016.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="MyBlog"><img class="site-icon" src="https://img.hasdsd.cn/imgfb2ae9dbdd3daa91c227a2134d61fa92ae2c861c_full.jpg"/><span class="site-name">MyBlog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">无题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-16T16:00:00.000Z" title="发表于 2023-04-17 00:00:00">2023-04-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-17T13:43:01.986Z" title="更新于 2023-04-17 21:43:01">2023-04-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Mysql高级篇"><a href="#Mysql高级篇" class="headerlink" title="Mysql高级篇"></a>Mysql高级篇</h1><h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h3 id="mysql体系结构"><a href="#mysql体系结构" class="headerlink" title="mysql体系结构"></a>mysql体系结构</h3><p><img src="https://img.hasdsd.cn/imgimage-20230417200559823.png" alt="image-20230417200559823"></p>
+<h3 id="存储引擎简介"><a href="#存储引擎简介" class="headerlink" title="存储引擎简介"></a>存储引擎简介</h3><p>飞机、直升飞机、火箭 ，他们的动力都来自于引擎，但是因为应用类型的不同，所以将引擎也不会相同。不能将火箭的引擎放到直升飞机中，反之更不行，所以引擎的使用和应用场景有着十分重要的关系</p>
+<p><img src="https://img.hasdsd.cn/imgimage-20230417200933534.png" alt="image-20230417200933534"></p>
+<p>存储引擎就是存储数据、建立索引、更新&#x2F;查询数据等技术的实现方式。存储引擎是基于表的而不是基于库的，所以存储引擎也可被称为表类型。</p>
+<p>我们看一下emp的建表语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show  create table emp；</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.hasdsd.cn/imgimage-20230417201509694.png" alt="image-20230417201509694"></p>
+<p>但是我们在建表时并没有引擎，为什么会是innnoDB？</p>
+<p>在mysql 5.5版本后建表的默认引擎为 innoDB</p>
+<p>在建表的时候就可以指定存储引擎</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">craete table 表名(</span><br><span class="line">) ENGINE=XXXX;</span><br></pre></td></tr></table></figure>
+
+<p> 查询该数据库所支持的存储引擎</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show engines;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.hasdsd.cn/imgimage-20230417204811342.png" alt="image-20230417204811342"></p>
+<h3 id="存储引擎特点"><a href="#存储引擎特点" class="headerlink" title="存储引擎特点"></a>存储引擎特点</h3><h4 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h4><p><strong>介绍</strong></p>
+<p>InnoDB是一种兼顾高可靠性和高性能的通用存储引擎，在MySQL 5.5之后，InnoDB是默认的MySQL存储引擎。</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>DML操作遵循ACID模型，支持事务;</li>
+<li>行级锁，提高并发访问性能;</li>
+<li>支持外键FOREIGN KEY约束，保证数据的完整性和正确性;</li>
+</ul>
+<p><strong>文件</strong></p>
+<p>xc.ibd: xx代表的是表名，innoDB引擎的每张表都会对应这样一个表空间文件，存储该表的表结构（frm、sdi)、数据和索引。</p>
+<p>参数：innodb_file_per_table </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;innodb_file_per_table&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img.hasdsd.cn/imgimage-20230417211949020.png" alt="image-20230417211949020">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </p>
+<p><strong>逻辑存储结构</strong></p>
+<ul>
+<li><p>Tablespece:表空间</p>
+</li>
+<li><p>segment:段</p>
+</li>
+<li><p>Extent:区</p>
+</li>
+<li><p>Page:页</p>
+</li>
+<li><p>Row:行</p>
+</li>
+</ul>
+<p><img src="https://img.hasdsd.cn/imgimage-20230417212246720.png" alt="image-20230417212246720"></p>
+<h4 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h4><p>介绍</p>
+<p>MylSAM是MySQL早期的默认存储引擎。</p>
+<p>特点:</p>
+<ul>
+<li>不支持事务，不支持外键</li>
+<li>支持表锁，不支持行锁</li>
+<li>访问速度快</li>
+</ul>
+<p><img src="https://img.hasdsd.cn/imgimage-20230417213121533.png" alt="image-20230417213121533"></p>
+<p>文件</p>
+<ul>
+<li>XXx.sdi:存储表结构信息</li>
+<li>XXX.MYD:存储数据</li>
+<li>xXX.MYI:存储索引</li>
+</ul>
+<h4 id="memory"><a href="#memory" class="headerlink" title="memory"></a>memory</h4><p>介绍</p>
+<p>Memory引擎的表数据时存储在内存中的，由于受到硬件问题、或断电问题的影响，只能将这些表作为临时表或缓存使用。</p>
+<p>特点</p>
+<ul>
+<li>内存存放</li>
+<li>hash索引（默认)</li>
+</ul>
+<p>文件</p>
+<p>XXx.sdi:存储表结构信息</p>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p><img src="https://img.hasdsd.cn/imgimage-20230417213728709.png" alt="image-20230417213728709"></p>
+<h3 id="存储引擎的选择"><a href="#存储引擎的选择" class="headerlink" title="存储引擎的选择"></a>存储引擎的选择</h3><p>在选择存储引擎时，应该根据应用系统的特点选择合适的存储引擎。对于复杂的应用系统，还可以根据实际情况选择多种存储引擎进行组合。</p>
+<ul>
+<li><p>InnoDB:是Mysql的默认存储引擎，支持事务、外键。如果应用对事务的完整性有比较高的要求，在并发条件下要求数据的一致程，数据操作除了插入和查询之外，还包含很多的更新、删除操作，那么InnoDB存储引擎是比较合适的选择。</p>
+</li>
+<li><p>MYISAM:如果应用是以读操作和插入操作为主，只有很少的更新和删除操作，并且对事务的完整性、并发性要求不是很高，那么选择这个存储引擎是非常合适的。</p>
+</li>
+<li><p>MEMORY:将所有数据保存在内存中，访问速度快，通常用于临时表及缓存。MEMORY的缺陷就是对表的大小有限制，太大的表无法缓存在内存中，而且无法保障数据的安全性。</p>
+</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">学不动学不懂学步冻</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/04/17/Mysql%E9%AB%98%E7%BA%A7%E7%AF%87/">http://example.com/2023/04/17/Mysql%E9%AB%98%E7%BA%A7%E7%AF%87/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">MyBlog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/mysql%E9%AB%98%E7%BA%A7/">mysql高级</a></div><div class="post_share"><div class="social-share" data-image="https://img.hasdsd.cn/imgQQ截图20230417200016.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/04/14/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="软件设计模式"><img class="cover" src="https://img.hasdsd.cn/imgQQ截图20230414082411.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">软件设计模式</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://avatars.githubusercontent.com/u/118332734?v=4" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">学不动学不懂学步冻</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">22</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/zzzzzf2001"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/zzzzzf2001" target="_blank" title=""><i class="fab fa-github"></i></a><a class="social-icon" href="/zzzzzf011129@163.com" target="_blank" title=""><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我们该怎样道别呢？向我们当初见面那样？</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mysql%E9%AB%98%E7%BA%A7%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text">Mysql高级篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-number">1.1.</span> <span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.1.</span> <span class="toc-text">mysql体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">存储引擎简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9"><span class="toc-number">1.1.3.</span> <span class="toc-text">存储引擎特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#InnoDB"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">InnoDB</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#memory"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.3.4.</span> <span class="toc-text">区别</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-number">1.1.4.</span> <span class="toc-text">存储引擎的选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">1.2.</span> <span class="toc-text">索引</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/04/17/Mysql%E9%AB%98%E7%BA%A7%E7%AF%87/" title="无题"><img src="https://img.hasdsd.cn/imgQQ截图20230417200016.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="无题"/></a><div class="content"><a class="title" href="/2023/04/17/Mysql%E9%AB%98%E7%BA%A7%E7%AF%87/" title="无题">无题</a><time datetime="2023-04-16T16:00:00.000Z" title="发表于 2023-04-17 00:00:00">2023-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/14/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="软件设计模式"><img src="https://img.hasdsd.cn/imgQQ截图20230414082411.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="软件设计模式"/></a><div class="content"><a class="title" href="/2023/04/14/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="软件设计模式">软件设计模式</a><time datetime="2023-04-14T00:25:19.513Z" title="发表于 2023-04-14 08:25:19">2023-04-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/12/%E8%A7%A3%E5%86%B3%E5%89%8D%E7%AB%AF%E8%AF%B7%E6%B1%82%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" title="解决前端请求跨域问题">解决前端请求跨域问题</a><time datetime="2023-04-12T06:29:05.724Z" title="发表于 2023-04-12 14:29:05">2023-04-12</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/12/%E5%B0%8F%E6%8F%92%E4%BB%B6HttpClinet%E7%9A%84%E4%BD%BF%E7%94%A8/" title="小插件HttpClinet的使用">小插件HttpClinet的使用</a><time datetime="2023-04-12T06:29:05.723Z" title="发表于 2023-04-12 14:29:05">2023-04-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/12/Mysql(%E5%86%8D%E6%9D%A5%E4%B8%80%E6%AC%A1)/" title="MySQL"><img src="https://img.hasdsd.cn/imgMySQL.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MySQL"/></a><div class="content"><a class="title" href="/2023/04/12/Mysql(%E5%86%8D%E6%9D%A5%E4%B8%80%E6%AC%A1)/" title="MySQL">MySQL</a><time datetime="2023-04-11T16:00:00.000Z" title="发表于 2023-04-12 00:00:00">2023-04-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By 学不动学不懂学步冻</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
